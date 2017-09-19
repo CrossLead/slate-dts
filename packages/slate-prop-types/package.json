@@ -1,0 +1,12 @@
+{
+  "name": "@crosslead/slate-prop-types-typings",
+  "version": "0.1.5",
+  "decription": "generated typings for slate-prop-types",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "./index.d.ts"
+}

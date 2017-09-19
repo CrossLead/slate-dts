@@ -36,10 +36,11 @@ generate() {
   $NODE_BIN/tsc -p ./.tmp/$PACKAGE/ > /dev/null
   rm ./.tmp/$PACKAGE/dist-dts/**/*.js ./.tmp/$PACKAGE/dist-dts/*.js 2> /dev/null
   cp -r ./.tmp/$PACKAGE/dist-dts/ ./packages/$PACKAGE
+  node ./scripts/generate-package-json.js $PACKAGE > ./packages/$PACKAGE/package.json
   echo "...done!"
 }
 
-
-
-
+#
+# do it
+#
 run

@@ -18,5 +18,8 @@
   "homepage": "https://github.com/CrossLead/slate-dts#readme",
   "dependencies": {
     "typescript": "^2.5.2"
+  },
+  "devDependencies": {
+    "lerna": "^2.2.0"
   }
 }
