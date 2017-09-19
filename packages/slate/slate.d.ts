@@ -63,7 +63,7 @@ declare module 'slate/models/block' {
     /**
         * Prevent circular dependencies.
         */
-    // import './document';
+    import './document';
     const Block_base: any;
     /**
         * Block.
@@ -272,8 +272,8 @@ declare module 'slate/models/document' {
     /**
         * Prevent circular dependencies.
         */
-    // import './block';
-    // import './inline';
+    import './block';
+    import './inline';
     const Document_base: any;
     /**
         * Document.
@@ -422,7 +422,7 @@ declare module 'slate/models/inline' {
     /**
         * Prevent circular dependencies.
         */
-    // import './document';
+    import './document';
     const Inline_base: any;
     /**
         * Inline.

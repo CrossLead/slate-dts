@@ -1,5 +1,5 @@
 {
-  "name": "@crosslead/slate-typings",
+  "name": "slate-typings",
   "version": "0.24.5",
   "decription": "generated typings for slate",
   "repository": {
