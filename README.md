@@ -1,4 +1,4 @@
-# Generated TypeScript definition files for slate
+# Generated TypeScript definition files for [Slate](https://github.com/ianstormtaylor/slate)
 
 ## Using the typings
 
