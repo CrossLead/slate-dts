@@ -1,6 +1,6 @@
 {
-  "name": "slate-dev-logger-typings",
-  "version": "0.0.3",
+  "name": "@crosslead/slate-dev-logger-typings",
+  "version": "0.1.6",
   "decription": "generated typings for slate-dev-logger",
   "repository": {
     "type": "git",
@@ -8,5 +8,5 @@
   },
   "license": "Apache-2.0",
   "main": "index.js",
-  "typings": "./index.d.ts"
+  "typings": "slate-dev-logger.d.ts"
 }

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/CrossLead/slate-dts#readme",
   "dependencies": {
+    "dts-bundle": "^0.7.3",
     "typescript": "^2.5.2"
   },
   "devDependencies": {

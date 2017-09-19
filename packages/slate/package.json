@@ -1,6 +1,6 @@
 {
-  "name": "slate-typings",
-  "version": "0.0.3",
+  "name": "@crosslead/slate-typings",
+  "version": "0.24.5",
   "decription": "generated typings for slate",
   "repository": {
     "type": "git",
@@ -8,5 +8,5 @@
   },
   "license": "Apache-2.0",
   "main": "index.js",
-  "typings": "./index.d.ts"
+  "typings": "slate.d.ts"
 }

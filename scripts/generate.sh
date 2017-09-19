@@ -37,6 +37,8 @@ generate() {
   rm ./.tmp/$PACKAGE/dist-dts/**/*.js ./.tmp/$PACKAGE/dist-dts/*.js 2> /dev/null
   cp -r ./.tmp/$PACKAGE/dist-dts/ ./packages/$PACKAGE
   node ./scripts/generate-package-json.js $PACKAGE > ./packages/$PACKAGE/package.json
+  node ./scripts/dts-bundle.js $PACKAGE
+  rm -rf ./packages/$PACKAGE/**/*.d.ts ./packages/$PACKAGE/index.d.ts 2> /dev/null
   echo "...done!"
 }
 

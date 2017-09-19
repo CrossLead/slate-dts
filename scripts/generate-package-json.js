@@ -1,4 +1,3 @@
-const fs = require('fs');
 const [_, __, package] = process.argv;
 
 const package$json = require(`../slate/packages/${package}/package.json`);
@@ -11,5 +10,5 @@ console.log(JSON.stringify({
   repository: this$package$json.repository,
   license: this$package$json.license,
   main: 'index.js',
-  typings: './index.d.ts'
+  typings: `${package$json.name}.d.ts`
 }, null, 2));

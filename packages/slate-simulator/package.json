@@ -1,6 +1,6 @@
 {
-  "name": "slate-simulator-typings",
-  "version": "0.0.3",
+  "name": "@crosslead/slate-simulator-typings",
+  "version": "0.1.5",
   "decription": "generated typings for slate-simulator",
   "repository": {
     "type": "git",
@@ -8,5 +8,5 @@
   },
   "license": "Apache-2.0",
   "main": "index.js",
-  "typings": "./index.d.ts"
+  "typings": "slate-simulator.d.ts"
 }
