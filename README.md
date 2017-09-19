@@ -2,7 +2,7 @@
 
 ## Typings
 
-see [`./typings`](./typings) for the type definition files.
+see [`./packages`](./packages) for the type definition files.
 
 ## Building
 
