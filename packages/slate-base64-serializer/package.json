@@ -1,6 +1,6 @@
 {
   "name": "@crosslead/slate-base64-serializer-typings",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "decription": "generated typings for slate-base64-serializer",
   "repository": {
     "type": "git",
@@ -8,5 +8,6 @@
   },
   "license": "Apache-2.0",
   "main": "index.js",
-  "typings": "slate-base64-serializer.d.ts"
+  "typings": "slate-base64-serializer.d.ts",
+  "private": false
 }
