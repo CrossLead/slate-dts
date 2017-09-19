@@ -1,6 +1,6 @@
 {
-  "name": "@crosslead/slate-dev-logger-typings",
-  "version": "0.0.2",
+  "name": "slate-dev-logger-typings",
+  "version": "0.0.3",
   "decription": "generated typings for slate-dev-logger",
   "repository": {
     "type": "git",
