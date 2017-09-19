@@ -1,6 +1,6 @@
 {
   "name": "@crosslead/slate-prop-types-typings",
-  "version": "0.1.5",
+  "version": "0.0.2",
   "decription": "generated typings for slate-prop-types",
   "repository": {
     "type": "git",

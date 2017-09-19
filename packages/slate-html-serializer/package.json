@@ -1,6 +1,6 @@
 {
   "name": "@crosslead/slate-html-serializer-typings",
-  "version": "0.1.5",
+  "version": "0.0.2",
   "decription": "generated typings for slate-html-serializer",
   "repository": {
     "type": "git",
