@@ -1,6 +1,6 @@
 {
-  "name": "slate-plain-serializer-typings",
-  "version": "0.1.5",
+  "name": "@crosslead/slate-plain-serializer-typings",
+  "version": "0.0.1",
   "decription": "generated typings for slate-plain-serializer",
   "repository": {
     "type": "git",

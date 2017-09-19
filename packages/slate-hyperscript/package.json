@@ -1,6 +1,6 @@
 {
-  "name": "slate-hyperscript-typings",
-  "version": "0.1.5",
+  "name": "@crosslead/slate-hyperscript-typings",
+  "version": "0.0.1",
   "decription": "generated typings for slate-hyperscript",
   "repository": {
     "type": "git",
