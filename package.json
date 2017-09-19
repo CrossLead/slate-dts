@@ -16,11 +16,9 @@
     "url": "https://github.com/CrossLead/slate-dts/issues"
   },
   "homepage": "https://github.com/CrossLead/slate-dts#readme",
-  "dependencies": {
+  "devDependencies": {
+    "lerna": "^2.2.0",
     "dts-bundle": "^0.7.3",
     "typescript": "^2.5.2"
-  },
-  "devDependencies": {
-    "lerna": "^2.2.0"
   }
 }

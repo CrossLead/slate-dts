@@ -1,6 +1,6 @@
 {
   "name": "@crosslead/slate-react-typings",
-  "version": "0.0.2",
+  "version": "0.1.5",
   "decription": "generated typings for slate-react",
   "repository": {
     "type": "git",
