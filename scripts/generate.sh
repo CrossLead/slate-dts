@@ -27,18 +27,31 @@ generate() {
   local PACKAGE=$1
   local NODE_BIN=`npm bin`
   echo "generating typings for $PACKAGE..."
-  rm -rf ./.tmp
-  rm -rf ./packages/$PACKAGE/**/*.d.ts ./packages/$PACKAGE/*.d.ts 2> /dev/null
+
+  # clean
+  rm -rf ./.tmp ./packages/$PACKAGE/**/*.d.ts ./packages/$PACKAGE/*.d.ts 2> /dev/null
+
+  # make temp and move package source to temp
   mkdir -p ./.tmp
   cp -r ./slate/packages/$PACKAGE/ ./.tmp/$PACKAGE
   cp ./tsconfig.json ./.tmp/$PACKAGE/
+
+  # rename js to ts
   rename -S .js .tsx ./.tmp/$PACKAGE/src/**/*.js ./.tmp/$PACKAGE/src/*.js 2> /dev/null
+
+  #compile, output dts
   $NODE_BIN/tsc -p ./.tmp/$PACKAGE/ > /dev/null
+
+  # copy .d.ts files to main package folder
   rm ./.tmp/$PACKAGE/dist-dts/**/*.js ./.tmp/$PACKAGE/dist-dts/*.js 2> /dev/null
   cp -r ./.tmp/$PACKAGE/dist-dts/ ./packages/$PACKAGE
+
+  # combine individual .d.ts files
   node ./scripts/generate-package-json.js $PACKAGE > ./packages/$PACKAGE/package.json
   node ./scripts/dts-bundle.js $PACKAGE
-  node ./scripts/remove-relative-imports.js $PACKAGE
+  node ./scripts/definition-modifications.js $PACKAGE
+
+  # cleanup
   rm -rf ./packages/$PACKAGE/**/*.d.ts ./packages/$PACKAGE/index.d.ts 2> /dev/null
   echo "...done!"
 }
