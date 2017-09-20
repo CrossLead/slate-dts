@@ -38,14 +38,14 @@ declare module 'slate-html-serializer' {
                 * @param {Object} element
                 * @return {Any}
                 */
-            deserializeElement: (element: any) => any;
+            deserializeElement(element: any): any
             /**
                 * Deserialize a `mark` object.
                 *
                 * @param {Object} mark
                 * @return {Array}
                 */
-            deserializeMark: (mark: any) => any;
+            deserializeMark(mark: any): any
             /**
                 * Serialize a `state` object into an HTML string.
                 *
@@ -61,28 +61,28 @@ declare module 'slate-html-serializer' {
                 * @param {Node} node
                 * @return {String}
                 */
-            serializeNode: (node: any) => any;
+            serializeNode(node: any): any
             /**
                 * Serialize a `range`.
                 *
                 * @param {Range} range
                 * @return {String}
                 */
-            serializeRange: (range: any) => any;
+            serializeRange(range: any): any
             /**
                 * Serialize a `string`.
                 *
                 * @param {String} string
                 * @return {String}
                 */
-            serializeString: (string: any) => any;
+            serializeString(string: any): any
             /**
                 * Filter out cruft newline nodes inserted by the DOM parser.
                 *
                 * @param {Object} element
                 * @return {Boolean}
                 */
-            cruftNewline: (element: any) => boolean;
+            cruftNewline(element: any): boolean
     }
     export default Html;
 }

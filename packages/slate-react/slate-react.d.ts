@@ -27,13 +27,13 @@ declare module 'slate-react' {
 }
 
 declare module 'slate-react/components/editor' {
-    import React from 'react';
+    import * as React from 'react';
     /**
         * Editor.
         *
         * @type {Component}
         */
-    class Editor extends React.Component {
+    class Editor extends React.Component<{[K in keyof (typeof Editor)['propTypes']]?: any }, any>{
             /**
                 * Property types.
                 *
@@ -82,46 +82,46 @@ declare module 'slate-react/components/editor' {
                 *
                 * @param {Object} props
                 */
-            componentWillReceiveProps: (props: any) => void;
+            componentWillReceiveProps(props: any): void
             /**
                 * Cache a `state` in memory to be able to compare against it later, for
                 * things like `onDocumentChange`.
                 *
                 * @param {State} state
                 */
-            cacheState: (state: any) => void;
+            cacheState(state: any): void
             /**
                 * Programmatically blur the editor.
                 */
-            blur: () => void;
+            blur(): void
             /**
                 * Programmatically focus the editor.
                 */
-            focus: () => void;
+            focus(): void
             /**
                 * Get the editor's current schema.
                 *
                 * @return {Schema}
                 */
-            getSchema: () => any;
+            getSchema(): any
             /**
                 * Get the editor's current state.
                 *
                 * @return {State}
                 */
-            getState: () => any;
+            getState(): any
             /**
                 * Perform a change `fn` on the editor's current state.
                 *
                 * @param {Function} fn
                 */
-            change: (fn: any) => void;
+            change(fn: any): void
             /**
                 * On change.
                 *
                 * @param {Change} change
                 */
-            onChange: (change: any) => void;
+            onChange(change: any): void
             /**
                 * Render the editor.
                 *
@@ -133,13 +133,13 @@ declare module 'slate-react/components/editor' {
 }
 
 declare module 'slate-react/components/placeholder' {
-    import React from 'react';
+    import * as React from 'react';
     /**
         * Placeholder.
         *
         * @type {Component}
         */
-    class Placeholder extends React.Component {
+    class Placeholder extends React.Component<{[K in keyof (typeof Placeholder)['propTypes']]?: any }, any>{
             /**
                 * Property types.
                 *
@@ -169,13 +169,13 @@ declare module 'slate-react/components/placeholder' {
                 * @param {Object} state
                 * @return {Boolean}
                 */
-            shouldComponentUpdate: (props: any, state: any) => boolean;
+            shouldComponentUpdate(props: any, state: any): boolean
             /**
                 * Is the placeholder visible?
                 *
                 * @return {Boolean}
                 */
-            isVisible: () => boolean;
+            isVisible(): boolean
             /**
                 * Render.
                 *
