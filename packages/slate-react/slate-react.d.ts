@@ -78,18 +78,40 @@ declare module 'slate-react/components/editor' {
                 */
             constructor(props: any);
             /**
-                * When the `props` are updated, create a new `Stack` if necessary.
+                * When the `props` are updated, create a new `Stack` if necessary and run
+                * `onBeforeChange` to ensure the state is normalized.
                 *
                 * @param {Object} props
                 */
             componentWillReceiveProps(props: any): void
             /**
-                * Cache a `state` in memory to be able to compare against it later, for
-                * things like `onDocumentChange`.
+                * When the component first mounts, flush any temporary changes.
+                */
+            componentDidMount(): void
+            /**
+                * When the component updates, flush any temporary change.
+                */
+            componentDidUpdate(): void
+            /**
+                * Cache a `state` object to be able to compare against it later.
                 *
                 * @param {State} state
                 */
             cacheState(state: any): void
+            /**
+                * Queue a `change` object, to be able to flush it later. This is required for
+                * when a change needs to be applied to the state, but because of the React
+                * lifecycle we can't apply that change immediately. So we cache it here and
+                * later can call `this.flushChange()` to flush it.
+                *
+                * @param {Change} change
+                */
+            queueChange(change: any): void
+            /**
+                * Flush a temporarily stored `change` object, for when a change needed to be
+                * made but couldn't because of React's lifecycle.
+                */
+            flushChange(): void
             /**
                 * Programmatically blur the editor.
                 */
