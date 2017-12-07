@@ -8,14 +8,11 @@ declare module 'slate-simulator' {
         */
     class Simulator {
             /**
-                * Create a new `Simulator` with `plugins` and an initial `state`.
+                * Create a new `Simulator` with `plugins` and an initial `value`.
                 *
                 * @param {Object} attrs
                 */
-            constructor({plugins, state}: {
-                    plugins: any;
-                    state: any;
-            });
+            constructor(props: any);
     }
     export default Simulator;
 }

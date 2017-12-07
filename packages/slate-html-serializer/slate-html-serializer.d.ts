@@ -22,7 +22,7 @@ declare module 'slate-html-serializer' {
                 * @param {String} html
                 * @param {Object} options
                 *   @property {Boolean} toRaw
-                * @return {State}
+                * @return {Value}
                 */
             deserialize: (html: any, options?: {}) => any;
             /**
@@ -47,14 +47,14 @@ declare module 'slate-html-serializer' {
                 */
             deserializeMark(mark: any): any
             /**
-                * Serialize a `state` object into an HTML string.
+                * Serialize a `value` object into an HTML string.
                 *
-                * @param {State} state
+                * @param {Value} value
                 * @param {Object} options
                 *   @property {Boolean} render
                 * @return {String|Array}
                 */
-            serialize: (state: any, options?: {}) => any;
+            serialize: (value: any, options?: {}) => any;
             /**
                 * Serialize a `node`.
                 *
@@ -63,12 +63,12 @@ declare module 'slate-html-serializer' {
                 */
             serializeNode(node: any): any
             /**
-                * Serialize a `range`.
+                * Serialize a `leaf`.
                 *
-                * @param {Range} range
+                * @param {Leaf} leaf
                 * @return {String}
                 */
-            serializeRange(range: any): any
+            serializeLeaf(leaf: any): any
             /**
                 * Serialize a `string`.
                 *

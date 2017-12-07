@@ -8,23 +8,23 @@ declare module 'slate' {
     import Document from 'slate/models/document';
     import History from 'slate/models/history';
     import Inline from 'slate/models/inline';
+    import Leaf from 'slate/models/leaf';
     import Mark from 'slate/models/mark';
     import Node from 'slate/models/node';
+    import Operation from 'slate/models/operation';
     import Operations from 'slate/operations';
     import Range from 'slate/models/range';
     import Schema from 'slate/models/schema';
-    import Selection from 'slate/models/selection';
     import Stack from 'slate/models/stack';
-    import State from 'slate/models/state';
     import Text from 'slate/models/text';
-    import coreSchema from 'slate/schemas/core';
+    import Value from 'slate/models/value';
     import { resetKeyGenerator, setKeyGenerator } from 'slate/utils/generate-key';
     /**
       * Export.
       *
       * @type {Object}
       */
-    export { Block, Changes, Character, Data, Document, History, Inline, Mark, Node, Operations, Range, Schema, Selection, Stack, State, Text, coreSchema, resetKeyGenerator, setKeyGenerator };
+    export { Block, Changes, Character, Data, Document, History, Inline, Leaf, Mark, Node, Operation, Operations, Range, Schema, Stack, Text, Value, resetKeyGenerator, setKeyGenerator };
     const _default: {
         Block: any;
         Changes: any;
@@ -33,16 +33,16 @@ declare module 'slate' {
         Document: any;
         History: any;
         Inline: any;
+        Leaf: any;
         Mark: any;
         Node: any;
+        Operation: any;
         Operations: any;
         Range: any;
         Schema: any;
-        Selection: any;
         Stack: any;
-        State: any;
         Text: any;
-        coreSchema: any;
+        Value: any;
         resetKeyGenerator: any;
         setKeyGenerator: any;
     };
@@ -62,19 +62,19 @@ declare module 'slate/models/block' {
         */
     class Block extends Block_base {
             /**
-                * Create a new `Block` from `value`.
+                * Create a new `Block` from `attrs`.
                 *
-                * @param {Object|String|Block} value
+                * @param {Object|String|Block} attrs
                 * @return {Block}
                 */
-            static create(value?: {}): any;
+            static create(attrs?: {}): any;
             /**
-                * Create a list of `Blocks` from `value`.
+                * Create a list of `Blocks` from `attrs`.
                 *
-                * @param {Array<Block|Object>|List<Block|Object>} value
+                * @param {Array<Block|Object>|List<Block|Object>} attrs
                 * @return {List<Block>}
                 */
-            static createList(value?: any[]): any;
+            static createList(attrs?: any[]): any;
             /**
                 * Create a `Block` from a JSON `object`.
                 *
@@ -87,19 +87,19 @@ declare module 'slate/models/block' {
                 */
             static fromJS: typeof Block.fromJSON;
             /**
-                * Check if a `value` is a `Block`.
+                * Check if `any` is a `Block`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isBlock(value: any): boolean;
+            static isBlock(any: any): boolean;
             /**
-                * Check if a `value` is a block list.
+                * Check if `any` is a block list.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isBlockList(value: any): any;
+            static isBlockList(any: any): any;
             /**
                 * Get the node's kind.
                 *
@@ -125,22 +125,20 @@ declare module 'slate/models/block' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    data: any;
-                    key: any;
                     kind: string;
-                    isVoid: any;
                     type: any;
+                    isVoid: any;
+                    data: any;
                     nodes: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    data: any;
-                    key: any;
                     kind: string;
-                    isVoid: any;
                     type: any;
+                    isVoid: any;
+                    data: any;
                     nodes: any;
             };
     }
@@ -186,23 +184,19 @@ declare module 'slate/models/character' {
                 */
             static fromJS: typeof Character.fromJSON;
             /**
-                * Check if a `value` is a `Character`.
+                * Check if `any` is a `Character`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isCharacter(value: any): boolean;
+            static isCharacter(any: any): boolean;
             /**
-                * Check if a `value` is a character list.
+                * Check if `any` is a character list.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isCharacterList(value: any): any;
-            /**
-                * Deprecated.
-                */
-            static createListFromText(string: any): any;
+            static isCharacterList(any: any): any;
             /**
                 * Get the kind.
                 *
@@ -216,16 +210,16 @@ declare module 'slate/models/character' {
                 */
             toJSON(): {
                     kind: string;
-                    marks: any;
                     text: any;
+                    marks: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(): {
                     kind: string;
-                    marks: any;
                     text: any;
+                    marks: any;
             };
     }
     export default Character;
@@ -295,12 +289,12 @@ declare module 'slate/models/document' {
                 */
             static fromJS: typeof Document.fromJSON;
             /**
-                * Check if a `value` is a `Document`.
+                * Check if `any` is a `Document`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isDocument(value: any): boolean;
+            static isDocument(any: any): boolean;
             /**
                 * Get the node's kind.
                 *
@@ -326,18 +320,16 @@ declare module 'slate/models/document' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    data: any;
-                    key: any;
                     kind: string;
+                    data: any;
                     nodes: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    data: any;
-                    key: any;
                     kind: string;
+                    data: any;
                     nodes: any;
             };
     }
@@ -371,12 +363,12 @@ declare module 'slate/models/history' {
                 */
             static fromJS: typeof History.fromJSON;
             /**
-                * Check if a `value` is a `History`.
+                * Check if `any` is a `History`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isHistory(value: any): boolean;
+            static isHistory(any: any): boolean;
             /**
                 * Get the kind.
                 *
@@ -451,19 +443,19 @@ declare module 'slate/models/inline' {
                 */
             static fromJS: typeof Inline.fromJSON;
             /**
-                * Check if a `value` is a `Inline`.
+                * Check if `any` is a `Inline`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isInline(value: any): boolean;
+            static isInline(any: any): boolean;
             /**
-                * Check if a `value` is a list of inlines.
+                * Check if `any` is a list of inlines.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isInlineList(value: any): any;
+            static isInlineList(any: any): any;
             /**
                 * Get the node's kind.
                 *
@@ -489,26 +481,105 @@ declare module 'slate/models/inline' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    data: any;
-                    key: any;
                     kind: string;
-                    isVoid: any;
                     type: any;
+                    isVoid: any;
+                    data: any;
                     nodes: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    data: any;
-                    key: any;
                     kind: string;
-                    isVoid: any;
                     type: any;
+                    isVoid: any;
+                    data: any;
                     nodes: any;
             };
     }
     export default Inline;
+}
+
+declare module 'slate/models/leaf' {
+    const Leaf_base: any;
+    /**
+        * Leaf.
+        *
+        * @type {Leaf}
+        */
+    class Leaf extends Leaf_base {
+            /**
+                * Create a new `Leaf` with `attrs`.
+                *
+                * @param {Object|Leaf} attrs
+                * @return {Leaf}
+                */
+            static create(attrs?: {}): any;
+            /**
+                * Create a `Leaf` list from `attrs`.
+                *
+                * @param {Array<Leaf|Object>|List<Leaf|Object>} attrs
+                * @return {List<Leaf>}
+                */
+            static createList(attrs?: any[]): any;
+            /**
+                * Create a `Leaf` from a JSON `object`.
+                *
+                * @param {Object} object
+                * @return {Leaf}
+                */
+            static fromJSON(object: any): any;
+            /**
+                * Alias `fromJS`.
+                */
+            static fromJS: typeof Leaf.fromJSON;
+            /**
+                * Check if `any` is a `Leaf`.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isLeaf(any: any): boolean;
+            /**
+                * Check if `any` is a list of leaves.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isLeafList(any: any): any;
+            /**
+                * Get the node's kind.
+                *
+                * @return {String}
+                */
+            readonly kind: string;
+            /**
+                * Return leaf as a list of characters
+                *
+                * @return {List<Character>}
+                */
+            getCharacters(): any;
+            /**
+                * Return a JSON representation of the leaf.
+                *
+                * @return {Object}
+                */
+            toJSON(): {
+                    kind: string;
+                    text: any;
+                    marks: any;
+            };
+            /**
+                * Alias `toJS`.
+                */
+            toJS(): {
+                    kind: string;
+                    text: any;
+                    marks: any;
+            };
+    }
+    export default Leaf;
 }
 
 declare module 'slate/models/mark' {
@@ -557,19 +628,19 @@ declare module 'slate/models/mark' {
                 */
             static fromJS: typeof Mark.fromJSON;
             /**
-                * Check if a `value` is a `Mark`.
+                * Check if `any` is a `Mark`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isMark(value: any): boolean;
+            static isMark(any: any): boolean;
             /**
-                * Check if a `value` is a set of marks.
+                * Check if `any` is a set of marks.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isMarkSet(value: any): any;
+            static isMarkSet(any: any): any;
             /**
                 * Get the kind.
                 */
@@ -587,17 +658,17 @@ declare module 'slate/models/mark' {
                 * @return {Object}
                 */
             toJSON(): {
-                    data: any;
                     kind: string;
                     type: any;
+                    data: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(): {
-                    data: any;
                     kind: string;
                     type: any;
+                    data: any;
             };
     }
     export default Mark;
@@ -652,19 +723,19 @@ declare module 'slate/models/node' {
                 */
             static fromJS: typeof Node.fromJSON;
             /**
-                * Check if a `value` is a `Node`.
+                * Check if `any` is a `Node`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isNode(value: any): any;
+            static isNode(any: any): any;
             /**
-                * Check if a `value` is a list of nodes.
+                * Check if `any` is a list of nodes.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isNodeList(value: any): any;
+            static isNodeList(any: any): any;
             /**
                 * True if the node has both descendants in that order, false otherwise. The
                 * order is depth-first, post-order.
@@ -673,7 +744,7 @@ declare module 'slate/models/node' {
                 * @param {String} second
                 * @return {Boolean}
                 */
-            areDescendantsSorted(first: any, second: any): any;
+            areDescendantsSorted(first: any, second: any): boolean;
             /**
                 * Assert that a node has a child by `key` and return it.
                 *
@@ -745,14 +816,14 @@ declare module 'slate/models/node' {
             /**
                 * Get the leaf block descendants in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {List<Node>}
                 */
             getBlocksAtRange(range: any): any;
             /**
                 * Get the leaf block descendants in a `range` as an array
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Array}
                 */
             getBlocksAtRangeAsArray(range: any): any;
@@ -785,14 +856,14 @@ declare module 'slate/models/node' {
             /**
                 * Get a list of the characters in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {List<Character>}
                 */
             getCharactersAtRange(range: any): any;
             /**
                 * Get a list of the characters in a `range` as an array.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Array}
                 */
             getCharactersAtRangeAsArray(range: any): any;
@@ -841,19 +912,12 @@ declare module 'slate/models/node' {
                 */
             getCommonAncestor(one: any, two: any): any;
             /**
-                * Get the component for the node from a `schema`.
+                * Get the decorations for the node from a `stack`.
                 *
-                * @param {Schema} schema
-                * @return {Component|Void}
+                * @param {Stack} stack
+                * @return {List}
                 */
-            getComponent(schema: any): any;
-            /**
-                * Get the decorations for the node from a `schema`.
-                *
-                * @param {Schema} schema
-                * @return {Array}
-                */
-            getDecorators(schema: any): any;
+            getDecorations(stack: any): any;
             /**
                 * Get the depth of a child node by `key`, with optional `startAt`.
                 *
@@ -877,14 +941,6 @@ declare module 'slate/models/node' {
                 */
             getDescendantAtPath(path: any): this;
             /**
-                * Get the decorators for a descendant by `key` given a `schema`.
-                *
-                * @param {String} key
-                * @param {Schema} schema
-                * @return {Array}
-                */
-            getDescendantDecorators(key: any, schema: any): any[];
-            /**
                 * Get the first child text node.
                 *
                 * @return {Node|Null}
@@ -893,7 +949,7 @@ declare module 'slate/models/node' {
             /**
                 * Get a fragment of the node at a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Document}
                 */
             getFragmentAtRange(range: any): any;
@@ -948,14 +1004,14 @@ declare module 'slate/models/node' {
             /**
                 * Get the closest inline nodes for each text node in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {List<Node>}
                 */
             getInlinesAtRange(range: any): any;
             /**
                 * Get the closest inline nodes for each text node in a `range` as an array.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Array}
                 */
             getInlinesAtRangeAsArray(range: any): any[];
@@ -973,6 +1029,12 @@ declare module 'slate/models/node' {
                 * @return {Array}
                 */
             getInlinesByTypeAsArray(type: any): any;
+            /**
+                * Return a set of all keys in the node as an array.
+                *
+                * @return {Array<String>}
+                */
+            getKeysAsArray(): any[];
             /**
                 * Return a set of all keys in the node.
                 *
@@ -1006,35 +1068,35 @@ declare module 'slate/models/node' {
             /**
                 * Get a set of the marks in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Set<Mark>}
                 */
             getMarksAtRange(range: any): any;
             /**
                 * Get a set of the marks in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {OrderedSet<Mark>}
                 */
             getOrderedMarksAtRange(range: any): any;
             /**
                 * Get a set of the active marks in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Set<Mark>}
                 */
             getActiveMarksAtRange(range: any): any;
             /**
                 * Get a set of the marks in a `range`, by unioning.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Array}
                 */
             getMarksAtRangeAsArray(range: any): any;
             /**
                 * Get a set of marks in a `range`, by intersecting.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Array}
                 */
             getActiveMarksAtRangeAsArray(range: any): any;
@@ -1104,7 +1166,7 @@ declare module 'slate/models/node' {
             /**
                 * Get the offset from a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Number}
                 */
             getOffsetAtRange(range: any): any;
@@ -1122,6 +1184,13 @@ declare module 'slate/models/node' {
                 * @return {Array}
                 */
             getPath(key: any): any[];
+            /**
+                * Get the placeholder for the node from a `schema`.
+                *
+                * @param {Schema} schema
+                * @return {Component|Void}
+                */
+            getPlaceholder(schema: any): any;
             /**
                 * Get the block node before a descendant text node by `key`.
                 *
@@ -1148,7 +1217,7 @@ declare module 'slate/models/node' {
                 * whether the node `isSelected`, to determine whether not finding matches
                 * means everything is selected or nothing is.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @param {Boolean} isSelected
                 * @return {Object|Null}
                 */
@@ -1190,14 +1259,14 @@ declare module 'slate/models/node' {
             /**
                 * Get all of the text nodes in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {List<Node>}
                 */
             getTextsAtRange(range: any): any;
             /**
                 * Get all of the text nodes in a `range` as an array.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Array}
                 */
             getTextsAtRangeAsArray(range: any): any[];
@@ -1240,7 +1309,7 @@ declare module 'slate/models/node' {
             /**
                 * Check whether the node is in a `range`.
                 *
-                * @param {Selection} range
+                * @param {Range} range
                 * @return {Boolean}
                 */
             isInRange(range: any): boolean;
@@ -1321,86 +1390,85 @@ declare module 'slate/models/node' {
                 * Validate the node against a `schema`.
                 *
                 * @param {Schema} schema
-                * @return {Object|Null}
+                * @return {Function|Null}
                 */
             validate(schema: any): any;
-            /**
-                * True if the node has both descendants in that order, false otherwise. The
-                * order is depth-first, post-order.
-                *
-                * @param {String} first
-                * @param {String} second
-                * @return {Boolean}
-                */
-            areDescendantSorted(first: any, second: any): any;
-            /**
-                * Concat children `nodes` on to the end of the node.
-                *
-                * @param {List<Node>} nodes
-                * @return {Node}
-                */
-            concatChildren(nodes: any): any;
-            /**
-                * Decorate all of the text nodes with a `decorator` function.
-                *
-                * @param {Function} decorator
-                * @return {Node}
-                */
-            decorateTexts(decorator: any): any;
-            /**
-                * Recursively filter all descendant nodes with `iterator`, depth-first.
-                * It is different from `filterDescendants` in regard of the order of results.
-                *
-                * @param {Function} iterator
-                * @return {List<Node>}
-                */
-            filterDescendantsDeep(iterator: any): any;
-            /**
-                * Recursively find all descendant nodes by `iterator`. Depth first.
-                *
-                * @param {Function} iterator
-                * @return {Node|Null}
-                */
-            findDescendantDeep(iterator: any): any;
-            /**
-                * Get children between two child keys.
-                *
-                * @param {String} start
-                * @param {String} end
-                * @return {Node}
-                */
-            getChildrenBetween(start: any, end: any): any;
-            /**
-                * Get children between two child keys, including the two children.
-                *
-                * @param {String} start
-                * @param {String} end
-                * @return {Node}
-                */
-            getChildrenBetweenIncluding(start: any, end: any): any;
-            /**
-                * Get the highest child ancestor of a node by `key`.
-                *
-                * @param {String} key
-                * @return {Node|Null}
-                */
-            getHighestChild(key: any): any;
-            /**
-                * Get the highest parent of a node by `key` which has an only child.
-                *
-                * @param {String} key
-                * @return {Node|Null}
-                */
-            getHighestOnlyChildParent(key: any): any;
-            /**
-                * Check if the inline nodes are split at a `range`.
-                *
-                * @param {Selection} range
-                * @return {Boolean}
-                */
-            isInlineSplitAtRange(range: any): any;
     }
     export default Node;
+}
+
+declare module 'slate/models/operation' {
+    const Operation_base: any;
+    /**
+        * Operation.
+        *
+        * @type {Operation}
+        */
+    class Operation extends Operation_base {
+            /**
+                * Create a new `Operation` with `attrs`.
+                *
+                * @param {Object|Array|List|String|Operation} attrs
+                * @return {Operation}
+                */
+            static create(attrs?: {}): any;
+            /**
+                * Create a list of `Operations` from `elements`.
+                *
+                * @param {Array<Operation|Object>|List<Operation|Object>} elements
+                * @return {List<Operation>}
+                */
+            static createList(elements?: any[]): any;
+            /**
+                * Create a `Operation` from a JSON `object`.
+                *
+                * @param {Object|Operation} object
+                * @return {Operation}
+                */
+            static fromJSON(object: any): any;
+            /**
+                * Alias `fromJS`.
+                */
+            static fromJS: typeof Operation.fromJSON;
+            /**
+                * Check if `any` is a `Operation`.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isOperation(any: any): boolean;
+            /**
+                * Check if `any` is a list of operations.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isOperationList(any: any): any;
+            /**
+                * Get the node's kind.
+                *
+                * @return {String}
+                */
+            readonly kind: string;
+            /**
+                * Return a JSON representation of the operation.
+                *
+                * @param {Object} options
+                * @return {Object}
+                */
+            toJSON(options?: {}): {
+                    kind: string;
+                    type: any;
+            };
+            /**
+                * Alias `toJS`.
+                */
+            toJS(options: any): {
+                    kind: string;
+                    type: any;
+            };
+    }
+    export default Operation;
 }
 
 declare module 'slate/operations' {
@@ -1427,182 +1495,16 @@ declare module 'slate/models/range' {
                 */
             static create(attrs?: {}): any;
             /**
-                * Create a list of `Ranges` from `value`.
+                * Create a list of `Ranges` from `elements`.
                 *
-                * @param {Array<Range|Object>|List<Range|Object>} value
+                * @param {Array<Range|Object>|List<Range|Object>} elements
                 * @return {List<Range>}
                 */
-            static createList(value?: any[]): any;
+            static createList(elements?: any[]): any;
             /**
-                * Create a `Range` from a JSON `object`.
+                * Create a dictionary of settable range properties from `attrs`.
                 *
-                * @param {Object} object
-                * @return {Range}
-                */
-            static fromJSON(object: any): any;
-            /**
-                * Alias `fromJS`.
-                */
-            static fromJS: typeof Range.fromJSON;
-            /**
-                * Check if a `value` is a `Range`.
-                *
-                * @param {Any} value
-                * @return {Boolean}
-                */
-            static isRange(value: any): boolean;
-            /**
-                * Check if a `value` is a list of ranges.
-                *
-                * @param {Any} value
-                * @return {Boolean}
-                */
-            static isRangeList(value: any): any;
-            /**
-                * Get the node's kind.
-                *
-                * @return {String}
-                */
-            readonly kind: string;
-            /**
-                * Return range as a list of characters
-                *
-                * @return {List<Character>}
-                */
-            getCharacters(): any;
-            /**
-                * Return a JSON representation of the range.
-                *
-                * @return {Object}
-                */
-            toJSON(): {
-                    kind: string;
-                    marks: any;
-                    text: any;
-            };
-            /**
-                * Alias `toJS`.
-                */
-            toJS(): {
-                    kind: string;
-                    marks: any;
-                    text: any;
-            };
-    }
-    export default Range;
-}
-
-declare module 'slate/models/schema' {
-    const Schema_base: any;
-    /**
-        * Schema.
-        *
-        * @type {Schema}
-        */
-    class Schema extends Schema_base {
-            /**
-                * Create a new `Schema` with `attrs`.
-                *
-                * @param {Object|Schema} attrs
-                * @return {Schema}
-                */
-            static create(attrs?: {}): any;
-            /**
-                * Check if a `value` is a `Schema`.
-                *
-                * @param {Any} value
-                * @return {Boolean}
-                */
-            static isSchema(value: any): boolean;
-            /**
-                * Create a `Schema` from a JSON `object`.
-                *
-                * @param {Object} object
-                * @return {Schema}
-                */
-            static fromJSON(object: any): any;
-            /**
-                * Alias `fromJS`.
-                */
-            static fromJS: typeof Schema.fromJSON;
-            /**
-                * Get the kind.
-                *
-                * @return {String}
-                */
-            readonly kind: string;
-            /**
-                * Return true if one rule can normalize the document
-                *
-                * @return {Boolean}
-                */
-            readonly hasValidators: any;
-            /**
-                * Return true if one rule can decorate text nodes
-                *
-                * @return {Boolean}
-                */
-            readonly hasDecorators: any;
-            /**
-                * Return the renderer for an `object`.
-                *
-                * This method is private, because it should always be called on one of the
-                * often-changing immutable objects instead, since it will be memoized for
-                * much better performance.
-                *
-                * @param {Mixed} object
-                * @return {Component|Void}
-                */
-            __getComponent(object: any): any;
-            /**
-                * Return the decorators for an `object`.
-                *
-                * This method is private, because it should always be called on one of the
-                * often-changing immutable objects instead, since it will be memoized for
-                * much better performance.
-                *
-                * @param {Mixed} object
-                * @return {Array}
-                */
-            __getDecorators(object: any): any;
-            /**
-                * Validate an `object` against the schema, returning the failing rule and
-                * value if the object is invalid, or void if it's valid.
-                *
-                * This method is private, because it should always be called on one of the
-                * often-changing immutable objects instead, since it will be memoized for
-                * much better performance.
-                *
-                * @param {Mixed} object
-                * @return {Object|Void}
-                */
-            __validate(object: any): {
-                    rule: any;
-                    value: any;
-            };
-    }
-    export default Schema;
-}
-
-declare module 'slate/models/selection' {
-    const Selection_base: any;
-    /**
-        * Selection.
-        *
-        * @type {Selection}
-        */
-    class Selection extends Selection_base {
-            /**
-                * Create a new `Selection` with `attrs`.
-                *
-                * @param {Object|Selection} attrs
-                * @return {Selection}
-                */
-            static create(attrs?: {}): any;
-            /**
-                * Create a dictionary of settable selection properties from `attrs`.
-                *
-                * @param {Object|String|Selection} attrs
+                * @param {Object|String|Range} attrs
                 * @return {Object}
                 */
             static createProperties(attrs?: {}): {} | {
@@ -1615,23 +1517,23 @@ declare module 'slate/models/selection' {
                     marks: any;
             };
             /**
-                * Create a `Selection` from a JSON `object`.
+                * Create a `Range` from a JSON `object`.
                 *
                 * @param {Object} object
-                * @return {Selection}
+                * @return {Range}
                 */
             static fromJSON(object: any): any;
             /**
                 * Alias `fromJS`.
                 */
-            static fromJS: typeof Selection.fromJSON;
+            static fromJS: typeof Range.fromJSON;
             /**
-                * Check if a `value` is a `Selection`.
+                * Check if an `obj` is a `Range`.
                 *
-                * @param {Any} value
+                * @param {Any} obj
                 * @return {Boolean}
                 */
-            static isSelection(value: any): boolean;
+            static isRange(obj: any): boolean;
             /**
                 * Get the kind.
                 *
@@ -1639,37 +1541,37 @@ declare module 'slate/models/selection' {
                 */
             readonly kind: string;
             /**
-                * Check whether the selection is blurred.
+                * Check whether the range is blurred.
                 *
                 * @return {Boolean}
                 */
             readonly isBlurred: boolean;
             /**
-                * Check whether the selection is collapsed.
+                * Check whether the range is collapsed.
                 *
                 * @return {Boolean}
                 */
             readonly isCollapsed: boolean;
             /**
-                * Check whether the selection is expanded.
+                * Check whether the range is expanded.
                 *
                 * @return {Boolean}
                 */
             readonly isExpanded: boolean;
             /**
-                * Check whether the selection is forward.
+                * Check whether the range is forward.
                 *
                 * @return {Boolean}
                 */
             readonly isForward: boolean;
             /**
-                * Check whether the selection's keys are set.
+                * Check whether the range's keys are set.
                 *
                 * @return {Boolean}
                 */
             readonly isSet: boolean;
             /**
-                * Check whether the selection's keys are not set.
+                * Check whether the range's keys are not set.
                 *
                 * @return {Boolean}
                 */
@@ -1699,21 +1601,21 @@ declare module 'slate/models/selection' {
                 */
             readonly endOffset: any;
             /**
-                * Check whether anchor point of the selection is at the start of a `node`.
+                * Check whether anchor point of the range is at the start of a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             hasAnchorAtStartOf(node: any): boolean;
             /**
-                * Check whether anchor point of the selection is at the end of a `node`.
+                * Check whether anchor point of the range is at the end of a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             hasAnchorAtEndOf(node: any): boolean;
             /**
-                * Check whether the anchor edge of a selection is in a `node` and at an
+                * Check whether the anchor edge of a range is in a `node` and at an
                 * offset between `start` and `end`.
                 *
                 * @param {Node} node
@@ -1723,28 +1625,28 @@ declare module 'slate/models/selection' {
                 */
             hasAnchorBetween(node: any, start: any, end: any): any;
             /**
-                * Check whether the anchor edge of a selection is in a `node`.
+                * Check whether the anchor edge of a range is in a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             hasAnchorIn(node: any): any;
             /**
-                * Check whether focus point of the selection is at the end of a `node`.
+                * Check whether focus point of the range is at the end of a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             hasFocusAtEndOf(node: any): boolean;
             /**
-                * Check whether focus point of the selection is at the start of a `node`.
+                * Check whether focus point of the range is at the start of a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             hasFocusAtStartOf(node: any): boolean;
             /**
-                * Check whether the focus edge of a selection is in a `node` and at an
+                * Check whether the focus edge of a range is in a `node` and at an
                 * offset between `start` and `end`.
                 *
                 * @param {Node} node
@@ -1754,140 +1656,140 @@ declare module 'slate/models/selection' {
                 */
             hasFocusBetween(node: any, start: any, end: any): any;
             /**
-                * Check whether the focus edge of a selection is in a `node`.
+                * Check whether the focus edge of a range is in a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             hasFocusIn(node: any): any;
             /**
-                * Check whether the selection is at the start of a `node`.
+                * Check whether the range is at the start of a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             isAtStartOf(node: any): boolean;
             /**
-                * Check whether the selection is at the end of a `node`.
+                * Check whether the range is at the end of a `node`.
                 *
                 * @param {Node} node
                 * @return {Boolean}
                 */
             isAtEndOf(node: any): boolean;
             /**
-                * Focus the selection.
+                * Focus the range.
                 *
-                * @return {Selection}
+                * @return {Range}
                 */
             focus(): any;
             /**
-                * Blur the selection.
+                * Blur the range.
                 *
-                * @return {Selection}
+                * @return {Range}
                 */
             blur(): any;
             /**
-                * Unset the selection.
+                * Unset the range.
                 *
-                * @return {Selection}
+                * @return {Range}
                 */
             deselect(): any;
             /**
-                * Flip the selection.
+                * Flip the range.
                 *
-                * @return {Selection}
+                * @return {Range}
                 */
             flip(): any;
             /**
                 * Move the anchor offset `n` characters.
                 *
                 * @param {Number} n (optional)
-                * @return {Selection}
+                * @return {Range}
                 */
             moveAnchor(n?: number): any;
             /**
                 * Move the anchor offset `n` characters.
                 *
                 * @param {Number} n (optional)
-                * @return {Selection}
+                * @return {Range}
                 */
             moveFocus(n?: number): any;
             /**
-                * Move the selection's anchor point to a `key` and `offset`.
+                * Move the range's anchor point to a `key` and `offset`.
                 *
                 * @param {String} key
                 * @param {Number} offset
-                * @return {Selection}
+                * @return {Range}
                 */
             moveAnchorTo(key: any, offset: any): any;
             /**
-                * Move the selection's focus point to a `key` and `offset`.
+                * Move the range's focus point to a `key` and `offset`.
                 *
                 * @param {String} key
                 * @param {Number} offset
-                * @return {Selection}
+                * @return {Range}
                 */
             moveFocusTo(key: any, offset: any): any;
             /**
-                * Move the selection to `anchorOffset`.
+                * Move the range to `anchorOffset`.
                 *
                 * @param {Number} anchorOffset
-                * @return {Selection}
+                * @return {Range}
                 */
             moveAnchorOffsetTo(anchorOffset: any): any;
             /**
-                * Move the selection to `focusOffset`.
+                * Move the range to `focusOffset`.
                 *
                 * @param {Number} focusOffset
-                * @return {Selection}
+                * @return {Range}
                 */
             moveFocusOffsetTo(focusOffset: any): any;
             /**
-                * Move the selection to `anchorOffset` and `focusOffset`.
+                * Move the range to `anchorOffset` and `focusOffset`.
                 *
                 * @param {Number} anchorOffset
                 * @param {Number} focusOffset (optional)
-                * @return {Selection}
+                * @return {Range}
                 */
             moveOffsetsTo(anchorOffset: any, focusOffset?: any): any;
             /**
                 * Move the focus point to the anchor point.
                 *
-                * @return {Selection}
+                * @return {Range}
                 */
             moveToAnchor(): any;
             /**
                 * Move the anchor point to the focus point.
                 *
-                * @return {Selection}
+                * @return {Range}
                 */
             moveToFocus(): any;
             /**
-                * Move the selection's anchor point to the start of a `node`.
+                * Move the range's anchor point to the start of a `node`.
                 *
                 * @param {Node} node
-                * @return {Selection}
+                * @return {Range}
                 */
             moveAnchorToStartOf(node: any): any;
             /**
-                * Move the selection's anchor point to the end of a `node`.
+                * Move the range's anchor point to the end of a `node`.
                 *
                 * @param {Node} node
-                * @return {Selection}
+                * @return {Range}
                 */
             moveAnchorToEndOf(node: any): any;
             /**
-                * Move the selection's focus point to the start of a `node`.
+                * Move the range's focus point to the start of a `node`.
                 *
                 * @param {Node} node
-                * @return {Selection}
+                * @return {Range}
                 */
             moveFocusToStartOf(node: any): any;
             /**
-                * Move the selection's focus point to the end of a `node`.
+                * Move the range's focus point to the end of a `node`.
                 *
                 * @param {Node} node
-                * @return {Selection}
+                * @return {Range}
                 */
             moveFocusToEndOf(node: any): any;
             /**
@@ -1895,117 +1797,147 @@ declare module 'slate/models/selection' {
                 *
                 * @param {Node} start
                 * @param {Node} end (optional)
-                * @return {Selection}
+                * @return {Range}
                 */
             moveToRangeOf(start: any, end?: any): any;
             /**
-                * Normalize the selection, relative to a `node`, ensuring that the anchor
-                * and focus nodes of the selection always refer to leaf text nodes.
+                * Normalize the range, relative to a `node`, ensuring that the anchor
+                * and focus nodes of the range always refer to leaf text nodes.
                 *
                 * @param {Node} node
-                * @return {Selection}
+                * @return {Range}
                 */
             normalize(node: any): any;
             /**
-                * Return a JSON representation of the selection.
+                * Return a JSON representation of the range.
                 *
                 * @return {Object}
                 */
             toJSON(): {
+                    kind: string;
                     anchorKey: any;
                     anchorOffset: any;
                     focusKey: any;
                     focusOffset: any;
                     isBackward: any;
                     isFocused: any;
-                    kind: string;
                     marks: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(): {
+                    kind: string;
                     anchorKey: any;
                     anchorOffset: any;
                     focusKey: any;
                     focusOffset: any;
                     isBackward: any;
                     isFocused: any;
-                    kind: string;
                     marks: any;
             };
-            /**
-                * Unset the selection.
-                *
-                * @return {Selection}
-                */
-            unset(): any;
-            /**
-                * Move the selection forward `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            moveForward(n?: number): any;
-            /**
-                * Move the selection backward `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            moveBackward(n?: number): any;
-            /**
-                * Move the anchor offset `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            moveAnchorOffset(n?: number): any;
-            /**
-                * Move the focus offset `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            moveFocusOffset(n?: number): any;
-            /**
-                * Move the start offset `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            moveStartOffset(n?: number): any;
-            /**
-                * Move the focus offset `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            moveEndOffset(n?: number): any;
-            /**
-                * Extend the focus point forward `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            extendForward(n?: number): any;
-            /**
-                * Extend the focus point backward `n` characters.
-                *
-                * @param {Number} n (optional)
-                * @return {Selection}
-                */
-            extendBackward(n?: number): any;
-            /**
-                * Move the selection to `anchorOffset` and `focusOffset`.
-                *
-                * @param {Number} anchorOffset
-                * @param {Number} focusOffset (optional)
-                * @return {Selection}
-                */
-            moveToOffsets(anchorOffset: any, focusOffset?: any): any;
     }
-    export default Selection;
+    export default Range;
+}
+
+declare module 'slate/models/schema' {
+    const Schema_base: any;
+    /**
+        * Schema.
+        *
+        * @type {Schema}
+        */
+    class Schema extends Schema_base {
+            /**
+                * Create a new `Schema` with `attrs`.
+                *
+                * @param {Object|Schema} attrs
+                * @return {Schema}
+                */
+            static create(attrs?: {}): any;
+            /**
+                * Create a `Schema` from a JSON `object`.
+                *
+                * @param {Object} object
+                * @return {Schema}
+                */
+            static fromJSON(object: any): any;
+            /**
+                * Alias `fromJS`.
+                */
+            static fromJS: typeof Schema.fromJSON;
+            /**
+                * Check if `any` is a `Schema`.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isSchema(any: any): boolean;
+            /**
+                * Get the kind.
+                *
+                * @return {String}
+                */
+            readonly kind: string;
+            /**
+                * Get the rule for an `object`.
+                *
+                * @param {Mixed} object
+                * @return {Object}
+                */
+            getRule(object: any): any;
+            /**
+                * Get a dictionary of the parent rule validations by child type.
+                *
+                * @return {Object|Null}
+                */
+            getParentRules(): {};
+            /**
+                * Fail validation by returning a normalizing change function.
+                *
+                * @param {String} reason
+                * @param {Object} context
+                * @return {Function}
+                */
+            fail(reason: any, context: any): (change: any) => void;
+            /**
+                * Normalize an invalid value with `reason` and `context`.
+                *
+                * @param {Change} change
+                * @param {String} reason
+                * @param {Mixed} context
+                */
+            normalize(change: any, reason: any, context: any): any;
+            /**
+                * Validate a `node` with the schema, returning a function that will fix the
+                * invalid node, or void if the node is valid.
+                *
+                * @param {Node} node
+                * @return {Function|Void}
+                */
+            validateNode(node: any): any;
+            /**
+                * Return a JSON representation of the schema.
+                *
+                * @return {Object}
+                */
+            toJSON(): {
+                    kind: string;
+                    document: any;
+                    blocks: any;
+                    inlines: any;
+            };
+            /**
+                * Alias `toJS`.
+                */
+            toJS(): {
+                    kind: string;
+                    document: any;
+                    blocks: any;
+                    inlines: any;
+            };
+    }
+    export default Schema;
 }
 
 declare module 'slate/models/stack' {
@@ -2020,18 +1952,15 @@ declare module 'slate/models/stack' {
                 * Constructor.
                 *
                 * @param {Object} attrs
-                *   @property {Array} plugins
-                *   @property {Schema|Object} schema
-                *   @property {Function} ...handlers
                 */
             static create(attrs?: {}): any;
             /**
-                * Check if a `value` is a `Stack`.
+                * Check if `any` is a `Stack`.
                 *
-                * @param {Any} value
+                * @param {Any} any
                 * @return {Boolean}
                 */
-            static isStack(value: any): boolean;
+            static isStack(any: any): boolean;
             /**
                 * Get the kind.
                 *
@@ -2039,65 +1968,301 @@ declare module 'slate/models/stack' {
                 */
             readonly kind: string;
             /**
-                * Invoke `render` on all of the plugins in reverse, building up a tree of
-                * higher-order components.
+                * Get all plugins with `property`.
                 *
-                * @param {State} state
-                * @param {Editor} editor
-                * @param {Object} children
-                * @param {Object} props
-                * @return {Component}
-                */
-            render(state: any, editor: any, props: any): any;
-            /**
-                * Invoke `renderPortal` on all of the plugins, building a list of portals.
-                *
-                * @param {State} state
-                * @param {Editor} editor
+                * @param {String} property
                 * @return {Array}
                 */
-            renderPortal(state: any, editor: any): any[];
+            getPluginsWith(property: any): any;
+            /**
+                * Iterate the plugins with `property`, returning the first non-null value.
+                *
+                * @param {String} property
+                * @param {Any} ...args
+                */
+            find(property: any, ...args: any[]): any;
+            /**
+                * Iterate the plugins with `property`, returning all the non-null values.
+                *
+                * @param {String} property
+                * @param {Any} ...args
+                * @return {Array}
+                */
+            map(property: any, ...args: any[]): any[];
+            /**
+                * Iterate the plugins with `property`, breaking on any a non-null values.
+                *
+                * @param {String} property
+                * @param {Any} ...args
+                */
+            run(property: any, ...args: any[]): void;
+            /**
+                * Iterate the plugins with `property`, reducing to a set of React children.
+                *
+                * @param {String} property
+                * @param {Object} props
+                * @param {Any} ...args
+                */
+            render(property: any, props: any, ...args: any[]): any;
     }
     export default Stack;
 }
 
-declare module 'slate/models/state' {
-    const State_base: any;
+declare module 'slate/models/text' {
+    const Text_base: any;
     /**
-        * State.
+        * Text.
         *
-        * @type {State}
+        * @type {Text}
         */
-    class State extends State_base {
+    class Text extends Text_base {
             /**
-                * Create a new `State` with `attrs`.
+                * Create a new `Text` with `attrs`.
                 *
-                * @param {Object|State} attrs
+                * @param {Object|Array|List|String|Text} attrs
+                * @return {Text}
+                */
+            static create(attrs?: string): any;
+            /**
+                * Create a list of `Texts` from `elements`.
+                *
+                * @param {Array<Text|Object>|List<Text|Object>} elements
+                * @return {List<Text>}
+                */
+            static createList(elements?: any[]): any;
+            /**
+                * Create a `Text` from a JSON `object`.
+                *
+                * @param {Object|Text} object
+                * @return {Text}
+                */
+            static fromJSON(object: any): any;
+            /**
+                * Alias `fromJS`.
+                */
+            static fromJS: typeof Text.fromJSON;
+            /**
+                * Check if `any` is a `Text`.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isText(any: any): boolean;
+            /**
+                * Check if `any` is a list of texts.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isTextList(any: any): any;
+            /**
+                * Get the node's kind.
+                *
+                * @return {String}
+                */
+            readonly kind: string;
+            /**
+                * Is the node empty?
+                *
+                * @return {Boolean}
+                */
+            readonly isEmpty: boolean;
+            /**
+                * Get the concatenated text of the node.
+                *
+                * @return {String}
+                */
+            readonly text: any;
+            /**
+                * Add a `mark` at `index` and `length`.
+                *
+                * @param {Number} index
+                * @param {Number} length
+                * @param {Mark} mark
+                * @return {Text}
+                */
+            addMark(index: any, length: any, mark: any): any;
+            /**
+                * Add a `set` of marks at `index` and `length`.
+                *
+                * @param {Number} index
+                * @param {Number} length
+                * @param {Set<Mark>} set
+                * @return {Text}
+                */
+            addMarks(index: any, length: any, set: any): any;
+            /**
+                * Derive a set of decorated characters with `decorations`.
+                *
+                * @param {List<Decoration>} decorations
+                * @return {List<Character>}
+                */
+            getDecoratedCharacters(decorations: any): any;
+            /**
+                * Get the decorations for the node from a `schema`.
+                *
+                * @param {Schema} schema
+                * @return {Array}
+                */
+            getDecorations(schema: any): any;
+            /**
+                * Derive the leaves for a list of `characters`.
+                *
+                * @param {Array|Void} decorations (optional)
+                * @return {List<Leaf>}
+                */
+            getLeaves(decorations?: any[]): any[];
+            /**
+                * Get all of the marks on the text.
+                *
+                * @return {OrderedSet<Mark>}
+                */
+            getMarks(): any;
+            /**
+                * Get all of the marks on the text as an array
+                *
+                * @return {Array}
+                */
+            getMarksAsArray(): any;
+            /**
+                * Get the marks on the text at `index`.
+                *
+                * @param {Number} index
+                * @return {Set<Mark>}
+                */
+            getMarksAtIndex(index: any): any;
+            /**
+                * Get a node by `key`, to parallel other nodes.
+                *
+                * @param {String} key
+                * @return {Node|Null}
+                */
+            getNode(key: any): this;
+            /**
+                * Check if the node has a node by `key`, to parallel other nodes.
+                *
+                * @param {String} key
+                * @return {Boolean}
+                */
+            hasNode(key: any): boolean;
+            /**
+                * Insert `text` at `index`.
+                *
+                * @param {Numbder} index
+                * @param {String} text
+                * @param {String} marks (optional)
+                * @return {Text}
+                */
+            insertText(index: any, text: any, marks: any): any;
+            /**
+                * Regenerate the node's key.
+                *
+                * @return {Text}
+                */
+            regenerateKey(): any;
+            /**
+                * Remove a `mark` at `index` and `length`.
+                *
+                * @param {Number} index
+                * @param {Number} length
+                * @param {Mark} mark
+                * @return {Text}
+                */
+            removeMark(index: any, length: any, mark: any): any;
+            /**
+                * Remove text from the text node at `index` for `length`.
+                *
+                * @param {Number} index
+                * @param {Number} length
+                * @return {Text}
+                */
+            removeText(index: any, length: any): any;
+            /**
+                * Return a JSON representation of the text.
+                *
                 * @param {Object} options
-                * @return {State}
+                * @return {Object}
+                */
+            toJSON(options?: {}): {
+                    kind: string;
+                    leaves: any;
+            };
+            /**
+                * Alias `toJS`.
+                */
+            toJS(options: any): {
+                    kind: string;
+                    leaves: any;
+            };
+            /**
+                * Update a `mark` at `index` and `length` with `properties`.
+                *
+                * @param {Number} index
+                * @param {Number} length
+                * @param {Mark} mark
+                * @param {Object} properties
+                * @return {Text}
+                */
+            updateMark(index: any, length: any, mark: any, properties: any): any;
+            /**
+                * Validate the text node against a `schema`.
+                *
+                * @param {Schema} schema
+                * @return {Object|Void}
+                */
+            validate(schema: any): any;
+    }
+    export default Text;
+}
+
+declare module 'slate/models/value' {
+    const Value_base: any;
+    /**
+        * Value.
+        *
+        * @type {Value}
+        */
+    class Value extends Value_base {
+            /**
+                * Create a new `Value` with `attrs`.
+                *
+                * @param {Object|Value} attrs
+                * @param {Object} options
+                * @return {Value}
                 */
             static create(attrs?: {}, options?: {}): any;
             /**
-                * Create a `State` from a JSON `object`.
+                * Create a dictionary of settable value properties from `attrs`.
+                *
+                * @param {Object|Value} attrs
+                * @return {Object}
+                */
+            static createProperties(attrs?: {}): {} | {
+                    data: any;
+                    decorations: any;
+                    schema: any;
+            };
+            /**
+                * Create a `Value` from a JSON `object`.
                 *
                 * @param {Object} object
                 * @param {Object} options
                 *   @property {Boolean} normalize
                 *   @property {Array} plugins
-                * @return {State}
+                * @return {Value}
                 */
             static fromJSON(object: any, options?: {}): any;
             /**
                 * Alias `fromJS`.
                 */
-            static fromJS: typeof State.fromJSON;
+            static fromJS: typeof Value.fromJSON;
             /**
-                * Check if a `value` is a `State`.
+                * Check if a `value` is a `Value`.
                 *
                 * @param {Any} value
                 * @return {Boolean}
                 */
-            static isState(value: any): boolean;
+            static isValue(value: any): boolean;
             /**
                 * Get the kind.
                 *
@@ -2273,6 +2438,42 @@ declare module 'slate/models/state' {
                 */
             readonly focusText: any;
             /**
+                * Get the next block node.
+                *
+                * @return {Block}
+                */
+            readonly nextBlock: any;
+            /**
+                * Get the previous block node.
+                *
+                * @return {Block}
+                */
+            readonly previousBlock: any;
+            /**
+                * Get the next inline node.
+                *
+                * @return {Inline}
+                */
+            readonly nextInline: any;
+            /**
+                * Get the previous inline node.
+                *
+                * @return {Inline}
+                */
+            readonly previousInline: any;
+            /**
+                * Get the next text node.
+                *
+                * @return {Text}
+                */
+            readonly nextText: any;
+            /**
+                * Get the previous text node.
+                *
+                * @return {Text}
+                */
+            readonly previousText: any;
+            /**
                 * Get the characters in the current selection.
                 *
                 * @return {List<Character>}
@@ -2321,261 +2522,37 @@ declare module 'slate/models/state' {
                 */
             readonly isEmpty: boolean;
             /**
-                * Create a new `Change` with the current state as a starting point.
+                * Check whether the selection is collapsed in a void node.
+                *
+                * @return {Boolean}
+                */
+            readonly isInVoid: any;
+            /**
+                * Create a new `Change` with the current value as a starting point.
                 *
                 * @param {Object} attrs
                 * @return {Change}
                 */
             change(attrs?: {}): any;
             /**
-                * Deprecated.
-                *
-                * @return {Change}
-                */
-            transform(...args: any[]): any;
-            /**
-                * Return a JSON representation of the state.
+                * Return a JSON representation of the value.
                 *
                 * @param {Object} options
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    data: any;
-                    document: any;
                     kind: string;
-                    history: any;
-                    selection: any;
+                    document: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    data: any;
+                    kind: string;
                     document: any;
-                    kind: string;
-                    history: any;
-                    selection: any;
             };
     }
-    export default State;
-}
-
-declare module 'slate/models/text' {
-    const Text_base: any;
-    /**
-        * Text.
-        *
-        * @type {Text}
-        */
-    class Text extends Text_base {
-            /**
-                * Create a new `Text` with `attrs`.
-                *
-                * @param {Object|Array|List|String|Text} attrs
-                * @return {Text}
-                */
-            static create(attrs?: {}): any;
-            /**
-                * Create a list of `Texts` from a `value`.
-                *
-                * @param {Array<Text|Object>|List<Text|Object>} value
-                * @return {List<Text>}
-                */
-            static createList(value?: any[]): any;
-            /**
-                * Create a `Text` from a JSON `object`.
-                *
-                * @param {Object|Text} object
-                * @return {Text}
-                */
-            static fromJSON(object: any): any;
-            /**
-                * Alias `fromJS`.
-                */
-            static fromJS: typeof Text.fromJSON;
-            /**
-                * Check if a `value` is a `Text`.
-                *
-                * @param {Any} value
-                * @return {Boolean}
-                */
-            static isText(value: any): boolean;
-            /**
-                * Check if a `value` is a list of texts.
-                *
-                * @param {Any} value
-                * @return {Boolean}
-                */
-            static isTextList(value: any): any;
-            /**
-                * Deprecated.
-                */
-            static createFromString(string: any): any;
-            /**
-                * Deprecated.
-                */
-            static createFromRanges(ranges: any): any;
-            /**
-                * Get the node's kind.
-                *
-                * @return {String}
-                */
-            readonly kind: string;
-            /**
-                * Is the node empty?
-                *
-                * @return {Boolean}
-                */
-            readonly isEmpty: boolean;
-            /**
-                * Get the concatenated text of the node.
-                *
-                * @return {String}
-                */
-            readonly text: any;
-            /**
-                * Add a `mark` at `index` and `length`.
-                *
-                * @param {Number} index
-                * @param {Number} length
-                * @param {Mark} mark
-                * @return {Text}
-                */
-            addMark(index: any, length: any, mark: any): any;
-            /**
-                * Derive a set of decorated characters with `decorators`.
-                *
-                * @param {Array} decorators
-                * @return {List<Character>}
-                */
-            getDecorations(decorators: any): any;
-            /**
-                * Get the decorations for the node from a `schema`.
-                *
-                * @param {Schema} schema
-                * @return {Array}
-                */
-            getDecorators(schema: any): any;
-            /**
-                * Get all of the marks on the text.
-                *
-                * @return {OrderedSet<Mark>}
-                */
-            getMarks(): any;
-            /**
-                * Get all of the marks on the text as an array
-                *
-                * @return {Array}
-                */
-            getMarksAsArray(): any;
-            /**
-                * Get the marks on the text at `index`.
-                *
-                * @param {Number} index
-                * @return {Set<Mark>}
-                */
-            getMarksAtIndex(index: any): any;
-            /**
-                * Get a node by `key`, to parallel other nodes.
-                *
-                * @param {String} key
-                * @return {Node|Null}
-                */
-            getNode(key: any): this;
-            /**
-                * Derive the ranges for a list of `characters`.
-                *
-                * @param {Array|Void} decorators (optional)
-                * @return {List<Range>}
-                */
-            getRanges(decorators?: any[]): any[];
-            /**
-                * Check if the node has a node by `key`, to parallel other nodes.
-                *
-                * @param {String} key
-                * @return {Boolean}
-                */
-            hasNode(key: any): boolean;
-            /**
-                * Insert `text` at `index`.
-                *
-                * @param {Numbder} index
-                * @param {String} text
-                * @param {String} marks (optional)
-                * @return {Text}
-                */
-            insertText(index: any, text: any, marks: any): any;
-            /**
-                * Regenerate the node's key.
-                *
-                * @return {Text}
-                */
-            regenerateKey(): any;
-            /**
-                * Remove a `mark` at `index` and `length`.
-                *
-                * @param {Number} index
-                * @param {Number} length
-                * @param {Mark} mark
-                * @return {Text}
-                */
-            removeMark(index: any, length: any, mark: any): any;
-            /**
-                * Remove text from the text node at `index` for `length`.
-                *
-                * @param {Number} index
-                * @param {Number} length
-                * @return {Text}
-                */
-            removeText(index: any, length: any): any;
-            /**
-                * Return a JSON representation of the text.
-                *
-                * @param {Object} options
-                * @return {Object}
-                */
-            toJSON(options?: {}): {
-                    key: any;
-                    kind: string;
-                    ranges: any;
-            };
-            /**
-                * Alias `toJS`.
-                */
-            toJS(options: any): {
-                    key: any;
-                    kind: string;
-                    ranges: any;
-            };
-            /**
-                * Update a `mark` at `index` and `length` with `properties`.
-                *
-                * @param {Number} index
-                * @param {Number} length
-                * @param {Mark} mark
-                * @param {Object} properties
-                * @return {Text}
-                */
-            updateMark(index: any, length: any, mark: any, properties: any): any;
-            /**
-                * Validate the text node against a `schema`.
-                *
-                * @param {Schema} schema
-                * @return {Object|Void}
-                */
-            validate(schema: any): any;
-    }
-    export default Text;
-}
-
-declare module 'slate/schemas/core' {
-    /**
-      * Create the core schema.
-      *
-      * @type {Schema}
-      */
-    const SCHEMA: any;
-    export default SCHEMA;
+    export default Value;
 }
 
 declare module 'slate/utils/generate-key' {

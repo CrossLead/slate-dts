@@ -17,6 +17,8 @@ declare module 'slate-prop-types' {
         history: (...args: any[]) => any;
         inline: (...args: any[]) => any;
         inlines: (...args: any[]) => any;
+        leaf: (...args: any[]) => any;
+        leaves: (...args: any[]) => any;
         mark: (...args: any[]) => any;
         marks: (...args: any[]) => any;
         node: (...args: any[]) => any;
@@ -24,9 +26,8 @@ declare module 'slate-prop-types' {
         range: (...args: any[]) => any;
         ranges: (...args: any[]) => any;
         schema: (...args: any[]) => any;
-        selection: (...args: any[]) => any;
         stack: (...args: any[]) => any;
-        state: (...args: any[]) => any;
+        value: (...args: any[]) => any;
         text: (...args: any[]) => any;
         texts: (...args: any[]) => any;
     };
