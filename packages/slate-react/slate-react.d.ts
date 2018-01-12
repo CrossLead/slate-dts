@@ -4,6 +4,7 @@
 
 declare module 'slate-react' {
     import Editor from 'slate-react/components/editor';
+    import cloneFragment from 'slate-react/utils/clone-fragment';
     import findDOMNode from 'slate-react/utils/find-dom-node';
     import findDOMRange from 'slate-react/utils/find-dom-range';
     import findNode from 'slate-react/utils/find-node';
@@ -11,14 +12,17 @@ declare module 'slate-react' {
     import getEventRange from 'slate-react/utils/get-event-range';
     import getEventTransfer from 'slate-react/utils/get-event-transfer';
     import setEventTransfer from 'slate-react/utils/set-event-transfer';
+    import AfterPlugin from 'slate-react/plugins/after';
+    import BeforePlugin from 'slate-react/plugins/before';
     /**
       * Export.
       *
       * @type {Object}
       */
-    export { Editor, findDOMNode, findDOMRange, findNode, findRange, getEventRange, getEventTransfer, setEventTransfer };
+    export { Editor, cloneFragment, findDOMNode, findDOMRange, findNode, findRange, getEventRange, getEventTransfer, setEventTransfer, AfterPlugin, BeforePlugin };
     const _default: {
         Editor: any;
+        cloneFragment: any;
         findDOMNode: any;
         findDOMRange: any;
         findNode: any;
@@ -26,6 +30,8 @@ declare module 'slate-react' {
         getEventRange: any;
         getEventTransfer: any;
         setEventTransfer: any;
+        AfterPlugin: any;
+        BeforePlugin: any;
     };
     export default _default;
 }
@@ -93,11 +99,6 @@ declare module 'slate-react/components/editor' {
                 * When the component updates, flush any temporary change.
                 */
             componentDidUpdate(): void
-            /**
-                * When the component unmounts, clear flushTimeout if it has been set
-                * to avoid calling onChange after unmount.
-                */
-            componentWillUnmount(): void
             /**
                 * Queue a `change` object, to be able to flush it later. This is required for
                 * when a change needs to be applied to the value, but because of the React
@@ -167,6 +168,18 @@ declare module 'slate-react/components/editor' {
             resolvePlugins: (plugins: any, schema: any) => any[];
     }
     export default Editor;
+}
+
+declare module 'slate-react/utils/clone-fragment' {
+    /**
+      * Prepares a Slate document fragment to be copied to the clipboard.
+      *
+      * @param {Event} event
+      * @param {Value} value
+      * @param {Document} [fragment]
+      */
+    function cloneFragment(event: any, value: any, fragment?: any): void;
+    export default cloneFragment;
 }
 
 declare module 'slate-react/utils/find-dom-node' {
@@ -260,5 +273,62 @@ declare module 'slate-react/utils/set-event-transfer' {
       */
     function setEventTransfer(event: any, type: any, content: any): void;
     export default setEventTransfer;
+}
+
+declare module 'slate-react/plugins/after' {
+    /**
+      * The after plugin.
+      *
+      * @return {Object}
+      */
+    function AfterPlugin(): {
+        onBeforeInput(event: any, change: any, editor: any): void
+        onBlur(event: any, change: any, editor: any): void
+        onClick(event: any, change: any, editor: any): boolean
+        onCopy(event: any, change: any, editor: any): void
+        onCut(event: any, change: any, editor: any): void
+        onDragEnd(event: any, change: any, editor: any): void
+        onDragOver(event: any, change: any, editor: any): void
+        onDragStart(event: any, change: any, editor: any): void
+        onDrop(event: any, change: any, editor: any): void
+        onInput(event: any, change: any, editor: any): void
+        onKeyDown(event: any, change: any, editor: any): any
+        onPaste(event: any, change: any, editor: any): void
+        onSelect(event: any, change: any, editor: any): void
+        renderEditor(props: any, editor: any): any
+        renderNode(props: any): any
+        renderPlaceholder(props: any): any
+    };
+    export default AfterPlugin;
+}
+
+declare module 'slate-react/plugins/before' {
+    /**
+      * The core before plugin.
+      *
+      * @return {Object}
+      */
+    function BeforePlugin(): {
+        onBeforeInput(event: any, change: any, editor: any): boolean
+        onBlur(event: any, change: any, editor: any): boolean
+        onChange(change: any, editor: any): void
+        onCompositionEnd(event: any, change: any, editor: any): void
+        onCompositionStart(event: any, change: any, editor: any): void
+        onCopy(event: any, change: any, editor: any): void
+        onCut(event: any, change: any, editor: any): boolean
+        onDragEnd(event: any, change: any, editor: any): void
+        onDragEnter(event: any, change: any, editor: any): void
+        onDragExit(event: any, change: any, editor: any): void
+        onDragLeave(event: any, change: any, editor: any): void
+        onDragOver(event: any, change: any, editor: any): boolean
+        onDragStart(event: any, change: any, editor: any): void
+        onDrop(event: any, change: any, editor: any): boolean
+        onFocus(event: any, change: any, editor: any): boolean
+        onInput(event: any, change: any, editor: any): boolean
+        onKeyDown(event: any, change: any, editor: any): boolean
+        onPaste(event: any, change: any, editor: any): boolean
+        onSelect(event: any, change: any, editor: any): boolean
+    };
+    export default BeforePlugin;
 }
 

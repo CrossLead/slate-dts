@@ -101,10 +101,11 @@ declare module 'slate/models/block' {
                 */
             static isBlockList(any: any): any;
             /**
-                * Get the node's kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Check if the block is empty.
@@ -125,7 +126,7 @@ declare module 'slate/models/block' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    kind: string;
+                    object: string;
                     type: any;
                     isVoid: any;
                     data: any;
@@ -135,7 +136,7 @@ declare module 'slate/models/block' {
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    kind: string;
+                    object: string;
                     type: any;
                     isVoid: any;
                     data: any;
@@ -198,10 +199,11 @@ declare module 'slate/models/character' {
                 */
             static isCharacterList(any: any): any;
             /**
-                * Get the kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Return a JSON representation of the character.
@@ -209,7 +211,7 @@ declare module 'slate/models/character' {
                 * @return {Object}
                 */
             toJSON(): {
-                    kind: string;
+                    object: string;
                     text: any;
                     marks: any;
             };
@@ -217,7 +219,7 @@ declare module 'slate/models/character' {
                 * Alias `toJS`.
                 */
             toJS(): {
-                    kind: string;
+                    object: string;
                     text: any;
                     marks: any;
             };
@@ -296,10 +298,11 @@ declare module 'slate/models/document' {
                 */
             static isDocument(any: any): boolean;
             /**
-                * Get the node's kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Check if the document is empty.
@@ -320,7 +323,7 @@ declare module 'slate/models/document' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    kind: string;
+                    object: string;
                     data: any;
                     nodes: any;
             };
@@ -328,7 +331,7 @@ declare module 'slate/models/document' {
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    kind: string;
+                    object: string;
                     data: any;
                     nodes: any;
             };
@@ -370,10 +373,11 @@ declare module 'slate/models/history' {
                 */
             static isHistory(any: any): boolean;
             /**
-                * Get the kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Save an `operation` into the history.
@@ -389,7 +393,7 @@ declare module 'slate/models/history' {
                 * @return {Object}
                 */
             toJSON(): {
-                    kind: string;
+                    object: string;
                     redos: any;
                     undos: any;
             };
@@ -397,7 +401,7 @@ declare module 'slate/models/history' {
                 * Alias `toJS`.
                 */
             toJS(): {
-                    kind: string;
+                    object: string;
                     redos: any;
                     undos: any;
             };
@@ -457,10 +461,11 @@ declare module 'slate/models/inline' {
                 */
             static isInlineList(any: any): any;
             /**
-                * Get the node's kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Check if the inline is empty.
@@ -481,7 +486,7 @@ declare module 'slate/models/inline' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    kind: string;
+                    object: string;
                     type: any;
                     isVoid: any;
                     data: any;
@@ -491,7 +496,7 @@ declare module 'slate/models/inline' {
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    kind: string;
+                    object: string;
                     type: any;
                     isVoid: any;
                     data: any;
@@ -549,10 +554,11 @@ declare module 'slate/models/leaf' {
                 */
             static isLeafList(any: any): any;
             /**
-                * Get the node's kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Return leaf as a list of characters
@@ -566,7 +572,7 @@ declare module 'slate/models/leaf' {
                 * @return {Object}
                 */
             toJSON(): {
-                    kind: string;
+                    object: string;
                     text: any;
                     marks: any;
             };
@@ -574,7 +580,7 @@ declare module 'slate/models/leaf' {
                 * Alias `toJS`.
                 */
             toJS(): {
-                    kind: string;
+                    object: string;
                     text: any;
                     marks: any;
             };
@@ -642,8 +648,9 @@ declare module 'slate/models/mark' {
                 */
             static isMarkSet(any: any): any;
             /**
-                * Get the kind.
+                * Object.
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Get the component for the node from a `schema`.
@@ -658,7 +665,7 @@ declare module 'slate/models/mark' {
                 * @return {Object}
                 */
             toJSON(): {
-                    kind: string;
+                    object: string;
                     type: any;
                     data: any;
             };
@@ -666,7 +673,7 @@ declare module 'slate/models/mark' {
                 * Alias `toJS`.
                 */
             toJS(): {
-                    kind: string;
+                    object: string;
                     type: any;
                     data: any;
             };
@@ -712,12 +719,12 @@ declare module 'slate/models/node' {
                     type: string;
             };
             /**
-                * Create a `Node` from a JSON `object`.
+                * Create a `Node` from a JSON `value`.
                 *
-                * @param {Object} object
+                * @param {Object} value
                 * @return {Node}
                 */
-            static fromJSON(object: any): any;
+            static fromJSON(value: any): any;
             /**
                 * Alias `fromJS`.
                 */
@@ -1445,10 +1452,11 @@ declare module 'slate/models/operation' {
                 */
             static isOperationList(any: any): any;
             /**
-                * Get the node's kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Return a JSON representation of the operation.
@@ -1457,14 +1465,14 @@ declare module 'slate/models/operation' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    kind: string;
+                    object: string;
                     type: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    kind: string;
+                    object: string;
                     type: any;
             };
     }
@@ -1535,10 +1543,11 @@ declare module 'slate/models/range' {
                 */
             static isRange(obj: any): boolean;
             /**
-                * Get the kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Check whether the range is blurred.
@@ -1814,7 +1823,7 @@ declare module 'slate/models/range' {
                 * @return {Object}
                 */
             toJSON(): {
-                    kind: string;
+                    object: string;
                     anchorKey: any;
                     anchorOffset: any;
                     focusKey: any;
@@ -1827,7 +1836,7 @@ declare module 'slate/models/range' {
                 * Alias `toJS`.
                 */
             toJS(): {
-                    kind: string;
+                    object: string;
                     anchorKey: any;
                     anchorOffset: any;
                     focusKey: any;
@@ -1874,10 +1883,11 @@ declare module 'slate/models/schema' {
                 */
             static isSchema(any: any): boolean;
             /**
-                * Get the kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Get the rule for an `object`.
@@ -1922,7 +1932,7 @@ declare module 'slate/models/schema' {
                 * @return {Object}
                 */
             toJSON(): {
-                    kind: string;
+                    object: string;
                     document: any;
                     blocks: any;
                     inlines: any;
@@ -1931,7 +1941,7 @@ declare module 'slate/models/schema' {
                 * Alias `toJS`.
                 */
             toJS(): {
-                    kind: string;
+                    object: string;
                     document: any;
                     blocks: any;
                     inlines: any;
@@ -1962,10 +1972,11 @@ declare module 'slate/models/stack' {
                 */
             static isStack(any: any): boolean;
             /**
-                * Get the kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Get all plugins with `property`.
@@ -2056,10 +2067,11 @@ declare module 'slate/models/text' {
                 */
             static isTextList(any: any): any;
             /**
-                * Get the node's kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Is the node empty?
@@ -2184,14 +2196,14 @@ declare module 'slate/models/text' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    kind: string;
+                    object: string;
                     leaves: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    kind: string;
+                    object: string;
                     leaves: any;
             };
             /**
@@ -2264,10 +2276,11 @@ declare module 'slate/models/value' {
                 */
             static isValue(value: any): boolean;
             /**
-                * Get the kind.
+                * Object.
                 *
                 * @return {String}
                 */
+            readonly object: string;
             readonly kind: string;
             /**
                 * Are there undoable events?
@@ -2541,14 +2554,14 @@ declare module 'slate/models/value' {
                 * @return {Object}
                 */
             toJSON(options?: {}): {
-                    kind: string;
+                    object: string;
                     document: any;
             };
             /**
                 * Alias `toJS`.
                 */
             toJS(options: any): {
-                    kind: string;
+                    object: string;
                     document: any;
             };
     }
