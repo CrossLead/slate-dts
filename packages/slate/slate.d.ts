@@ -2,6 +2,7 @@
 
 declare module 'slate' {
     import Block from 'slate/models/block';
+    import Change from 'slate/models/change';
     import Changes from 'slate/changes';
     import Character from 'slate/models/character';
     import Data from 'slate/models/data';
@@ -19,12 +20,13 @@ declare module 'slate' {
     import Text from 'slate/models/text';
     import Value from 'slate/models/value';
     import { resetKeyGenerator, setKeyGenerator } from 'slate/utils/generate-key';
+    import { resetMemoization, useMemoization } from 'slate/utils/memoize';
     /**
       * Export.
       *
       * @type {Object}
       */
-    export { Block, Changes, Character, Data, Document, History, Inline, Leaf, Mark, Node, Operation, Operations, Range, Schema, Stack, Text, Value, resetKeyGenerator, setKeyGenerator };
+    export { Block, Change, Changes, Character, Data, Document, History, Inline, Leaf, Mark, Node, Operation, Operations, Range, Schema, Stack, Text, Value, resetKeyGenerator, setKeyGenerator, resetMemoization, useMemoization };
     const _default: {
         Block: any;
         Changes: any;
@@ -45,6 +47,8 @@ declare module 'slate' {
         Value: any;
         resetKeyGenerator: any;
         setKeyGenerator: any;
+        resetMemoization: any;
+        useMemoization: any;
     };
     export default _default;
 }
@@ -144,6 +148,94 @@ declare module 'slate/models/block' {
             };
     }
     export default Block;
+}
+
+declare module 'slate/models/change' {
+    /**
+        * Change.
+        *
+        * @type {Change}
+        */
+    class Change {
+            /**
+                * Check if `any` is a `Change`.
+                *
+                * @param {Any} any
+                * @return {Boolean}
+                */
+            static isChange(any: any): boolean;
+            /**
+                * Create a new `Change` with `attrs`.
+                *
+                * @param {Object} attrs
+                *   @property {Value} value
+                */
+            constructor(attrs: any);
+            /**
+                * Object.
+                *
+                * @return {String}
+                */
+            readonly object: string;
+            readonly kind: string;
+            /**
+                * Apply an `operation` to the current value, saving the operation to the
+                * history if needed.
+                *
+                * @param {Operation|Object} operation
+                * @param {Object} options
+                * @return {Change}
+                */
+            applyOperation(operation: any, options?: {}): this;
+            /**
+                * Apply a series of `operations` to the current value.
+                *
+                * @param {Array|List} operations
+                * @param {Object} options
+                * @return {Change}
+                */
+            applyOperations(operations: any, options: any): this;
+            /**
+                * Call a change `fn` with arguments.
+                *
+                * @param {Function} fn
+                * @param {Mixed} ...args
+                * @return {Change}
+                */
+            call(fn: any, ...args: any[]): this;
+            /**
+                * Applies a series of change mutations and defers normalization until the end.
+                *
+                * @param {Function} customChange - function that accepts a change object and executes change operations
+                * @return {Change}
+                */
+            withoutNormalization(customChange: any): this;
+            /**
+                * Set an operation flag by `key` to `value`.
+                *
+                * @param {String} key
+                * @param {Any} value
+                * @return {Change}
+                */
+            setOperationFlag(key: any, value: any): this;
+            /**
+                * Get the `value` of the specified flag by its `key`. Optionally accepts an `options`
+                * object with override flags.
+                *
+                * @param {String} key
+                * @param {Object} options
+                * @return {Change}
+                */
+            getFlag(key: any, options?: {}): any;
+            /**
+                * Unset an operation flag by `key`.
+                *
+                * @param {String} key
+                * @return {Change}
+                */
+            unsetOperationFlag(key: any): this;
+    }
+    export default Change;
 }
 
 declare module 'slate/changes' {
@@ -1083,6 +1175,13 @@ declare module 'slate/models/node' {
                 * Get a set of the marks in a `range`.
                 *
                 * @param {Range} range
+                * @return {Set<Mark>}
+                */
+            getInsertMarksAtRange(range: any): any;
+            /**
+                * Get a set of the marks in a `range`.
+                *
+                * @param {Range} range
                 * @return {OrderedSet<Mark>}
                 */
             getOrderedMarksAtRange(range: any): any;
@@ -1100,6 +1199,20 @@ declare module 'slate/models/node' {
                 * @return {Array}
                 */
             getMarksAtRangeAsArray(range: any): any;
+            /**
+                * Get a set of the marks in a `range` for insertion behavior.
+                *
+                * @param {Range} range
+                * @return {Array}
+                */
+            getInsertMarksAtRangeAsArray(range: any): any;
+            /**
+                * Get a set of marks in a `range`, by treating it as collapsed.
+                *
+                * @param {Range} range
+                * @return {Array}
+                */
+            getMarksAtCollapsedRangeAsArray(range: any): any;
             /**
                 * Get a set of marks in a `range`, by intersecting.
                 *
@@ -1191,6 +1304,23 @@ declare module 'slate/models/node' {
                 * @return {Array}
                 */
             getPath(key: any): any[];
+            /**
+                * Refind the path of node if path is changed.
+                *
+                * @param {Array} path
+                * @param {String} key
+                * @return {Array}
+                */
+            refindPath(path: any, key: any): any;
+            /**
+                *
+                * Refind the node with the same node.key after change.
+                *
+                * @param {Array} path
+                * @param {String} key
+                * @return {Node|Void}
+                */
+            refindNode(path: any, key: any): any;
             /**
                 * Get the placeholder for the node from a `schema`.
                 *
@@ -1905,19 +2035,19 @@ declare module 'slate/models/schema' {
             /**
                 * Fail validation by returning a normalizing change function.
                 *
-                * @param {String} reason
+                * @param {String} violation
                 * @param {Object} context
                 * @return {Function}
                 */
-            fail(reason: any, context: any): (change: any) => void;
+            fail(violation: any, context: any): (change: any) => void;
             /**
-                * Normalize an invalid value with `reason` and `context`.
+                * Normalize an invalid value with `violation` and `context`.
                 *
                 * @param {Change} change
-                * @param {String} reason
+                * @param {String} violation
                 * @param {Mixed} context
                 */
-            normalize(change: any, reason: any, context: any): any;
+            normalize(change: any, violation: any, context: any): any;
             /**
                 * Validate a `node` with the schema, returning a function that will fix the
                 * invalid node, or void if the node is valid.
@@ -2585,11 +2715,33 @@ declare module 'slate/utils/generate-key' {
         * Reset the key generating function to its initial state.
         */
     function resetKeyGenerator(): void;
+    export default generateKey;
+    export { setKeyGenerator, resetKeyGenerator };
+}
+
+declare module 'slate/utils/memoize' {
     /**
-        * Export.
+        * Memoize all of the `properties` on a `object`.
         *
-        * @type {Object}
+        * @param {Object} object
+        * @param {Array} properties
+        * @return {Record}
         */
-    export { generateKey as default, setKeyGenerator, resetKeyGenerator };
+    function memoize(object: any, properties: any, options?: {}): void;
+    /**
+        * In DEV mode, clears the previously memoized values, globally.
+        *
+        * @return {Void}
+        */
+    function resetMemoization(): void;
+    /**
+        * In DEV mode, enable or disable the use of memoize values, globally.
+        *
+        * @param {Boolean} enabled
+        * @return {Void}
+        */
+    function useMemoization(enabled: any): void;
+    export default memoize;
+    export { resetMemoization, useMemoization };
 }
 

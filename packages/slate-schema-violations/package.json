@@ -1,0 +1,13 @@
+{
+  "name": "@crosslead/slate-schema-violations-typings",
+  "version": "0.1.4",
+  "decription": "generated typings for slate-schema-violations",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "slate-schema-violations.d.ts",
+  "private": false
+}
