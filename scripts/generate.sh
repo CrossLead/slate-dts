@@ -14,6 +14,9 @@ run() {
     generate ${package%/}
   done;
 
+    # prettier
+  `npm bin`/prettier --write ./packages/**/*.ts
+
   rm -rf ./slate
   rm -rf ./.tmp
 }
@@ -53,6 +56,7 @@ generate() {
 
   # cleanup
   rm -rf ./packages/$PACKAGE/**/*.d.ts ./packages/$PACKAGE/index.d.ts 2> /dev/null
+
   echo "...done!"
 }
 
