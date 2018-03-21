@@ -1,0 +1,13 @@
+{
+  "name": "@crosslead/slate-drop-or-paste-images-typings",
+  "version": "0.8.0",
+  "decription": "generated typings for slate-drop-or-paste-images",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "slate-drop-or-paste-images.d.ts",
+  "private": false
+}

@@ -4,9 +4,13 @@
 #
 run() {
   rm -rf ./slate
+  rm -rf ./slate-plugins
 
   echo "cloning latest version of slate..."
   git clone git@github.com:ianstormtaylor/slate.git --depth 1 2> /dev/null
+  git clone git@github.com:ianstormtaylor/slate-plugins.git --depth 1 2> /dev/null
+
+  cp -r ./slate-plugins/packages/* ./slate/packages
 
   local PACKAGES=$(cd slate/packages && ls -d */)
 
@@ -18,6 +22,7 @@ run() {
   `npm bin`/prettier --write ./packages/**/*.ts
 
   rm -rf ./slate
+  rm -rf ./slate-plugins
   rm -rf ./.tmp
 }
 

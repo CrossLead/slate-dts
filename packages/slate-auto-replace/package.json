@@ -1,0 +1,13 @@
+{
+  "name": "@crosslead/slate-auto-replace-typings",
+  "version": "0.9.0",
+  "decription": "generated typings for slate-auto-replace",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "slate-auto-replace.d.ts",
+  "private": false
+}

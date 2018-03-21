@@ -1,0 +1,13 @@
+{
+  "name": "@crosslead/slate-paste-linkify-typings",
+  "version": "0.5.0",
+  "decription": "generated typings for slate-paste-linkify",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "slate-paste-linkify.d.ts",
+  "private": false
+}

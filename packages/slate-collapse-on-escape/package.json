@@ -1,0 +1,13 @@
+{
+  "name": "@crosslead/slate-collapse-on-escape-typings",
+  "version": "0.6.0",
+  "decription": "generated typings for slate-collapse-on-escape",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "slate-collapse-on-escape.d.ts",
+  "private": false
+}

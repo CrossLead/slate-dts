@@ -1,0 +1,13 @@
+{
+  "name": "@crosslead/slate-soft-break-typings",
+  "version": "0.6.0",
+  "decription": "generated typings for slate-soft-break",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrossLead/slate-dts.git"
+  },
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "typings": "slate-soft-break.d.ts",
+  "private": false
+}
