@@ -136,6 +136,8 @@ declare module "slate/models/block" {
     readonly kind: string;
     /**
      * Check if the block is empty.
+     * Returns true if block is not void and all it's children nodes are empty.
+     * Void node is never empty, regardless of it's content.
      *
      * @return {Boolean}
      */
@@ -423,6 +425,7 @@ declare module "slate/models/document" {
     readonly kind: string;
     /**
      * Check if the document is empty.
+     * Returns true if all it's children nodes are empty.
      *
      * @return {Boolean}
      */
@@ -588,6 +591,8 @@ declare module "slate/models/inline" {
     readonly kind: string;
     /**
      * Check if the inline is empty.
+     * Returns true if inline is not void and all it's children nodes are empty.
+     * Void node is never empty, regardless of it's content.
      *
      * @return {Boolean}
      */
@@ -1568,6 +1573,13 @@ declare module "slate/models/node" {
      * @return {Function|Null}
      */
     validate(schema: any): any;
+    /**
+     * Get the first invalid descendant
+     *
+     * @param {Schema} schema
+     * @return {Node|Text|Null}
+     */
+    getFirstInvalidDescendant(schema: any): any;
   }
   export default Node;
 }
@@ -2397,6 +2409,14 @@ declare module "slate/models/text" {
      * @return {Object|Void}
      */
     validate(schema: any): any;
+    /**
+     * Get the first invalid descendant
+     * PREF: Do not cache this method; because it can cause cycle reference
+     *
+     * @param {Schema} schema
+     * @returns {Text|Null}
+     */
+    getFirstInvalidDescendant(schema: any): this;
   }
   export default Text;
 }
@@ -2709,7 +2729,7 @@ declare module "slate/models/value" {
      *
      * @return {Boolean}
      */
-    readonly isEmpty: boolean;
+    readonly isEmpty: any;
     /**
      * Check whether the selection is collapsed in a void node.
      *
