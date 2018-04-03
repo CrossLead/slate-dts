@@ -20,6 +20,6 @@
   "devDependencies": {
     "dts-bundle": "^0.7.3",
     "prettier": "^1.11.1",
-    "typescript": "^2.5.2"
+    "typescript": "^2.8.1"
   }
 }
