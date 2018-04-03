@@ -107,7 +107,8 @@ declare module "slate-react/components/editor" {
      */
     componentWillReceiveProps(props: any): void;
     /**
-     * When the component first mounts, flush any temporary changes.
+     * When the component first mounts, flush any temporary changes,
+     * and then, focus the editor if `autoFocus` is set.
      */
     componentDidMount(): void;
     /**

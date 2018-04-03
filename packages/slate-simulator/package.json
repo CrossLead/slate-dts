@@ -1,6 +1,6 @@
 {
   "name": "@crosslead/slate-simulator-typings",
-  "version": "0.4.26",
+  "version": "0.4.27",
   "decription": "generated typings for slate-simulator",
   "repository": {
     "type": "git",

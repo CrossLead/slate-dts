@@ -742,15 +742,7 @@ declare module "slate/models/mark" {
      * @param {Object|String|Mark} attrs
      * @return {Object}
      */
-    static createProperties(attrs?: {}):
-      | {}
-      | {
-          data: any;
-          type: any;
-        }
-      | {
-          type: string;
-        };
+    static createProperties(attrs?: {}): {};
     /**
      * Create a `Mark` from a JSON `object`.
      *
@@ -840,16 +832,7 @@ declare module "slate/models/node" {
      * @param {Object|String|Node} attrs
      * @return {Object}
      */
-    static createProperties(attrs?: {}):
-      | {}
-      | {
-          data: any;
-          isVoid: any;
-          type: any;
-        }
-      | {
-          type: string;
-        };
+    static createProperties(attrs?: {}): {};
     /**
      * Create a `Node` from a JSON `value`.
      *
@@ -1697,17 +1680,7 @@ declare module "slate/models/range" {
      * @param {Object|String|Range} attrs
      * @return {Object}
      */
-    static createProperties(attrs?: {}):
-      | {}
-      | {
-          anchorKey: any;
-          anchorOffset: any;
-          focusKey: any;
-          focusOffset: any;
-          isBackward: any;
-          isFocused: any;
-          marks: any;
-        };
+    static createProperties(attrs?: {}): {};
     /**
      * Create a `Range` from a JSON `object`.
      *
@@ -2443,13 +2416,7 @@ declare module "slate/models/value" {
      * @param {Object|Value} attrs
      * @return {Object}
      */
-    static createProperties(attrs?: {}):
-      | {}
-      | {
-          data: any;
-          decorations: any;
-          schema: any;
-        };
+    static createProperties(attrs?: {}): {};
     /**
      * Create a `Value` from a JSON `object`.
      *
@@ -2795,7 +2762,7 @@ declare module "slate/utils/memoize" {
    * @param {Array} properties
    * @return {Record}
    */
-  function memoize(object: any, properties: any, options?: {}): void;
+  function memoize(object: any, properties: any): void;
   /**
    * In DEV mode, clears the previously memoized values, globally.
    *

@@ -1,6 +1,6 @@
 {
   "name": "@crosslead/slate-schema-violations-typings",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "decription": "generated typings for slate-schema-violations",
   "repository": {
     "type": "git",
